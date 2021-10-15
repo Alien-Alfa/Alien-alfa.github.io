@@ -1,5 +1,5 @@
 /*
-	Dimension by HTML5 UP
+	Massively by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
@@ -10,19 +10,105 @@
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
 		$header = $('#header'),
-		$footer = $('#footer'),
+		$nav = $('#nav'),
 		$main = $('#main'),
-		$main_articles = $main.children('article');
+		$navPanelToggle, $navPanel, $navPanelInner;
 
 	// Breakpoints.
 		breakpoints({
-			xlarge:   [ '1281px',  '1680px' ],
-			large:    [ '981px',   '1280px' ],
-			medium:   [ '737px',   '980px'  ],
-			small:    [ '481px',   '736px'  ],
-			xsmall:   [ '361px',   '480px'  ],
-			xxsmall:  [ null,      '360px'  ]
+			default:   ['1681px',   null       ],
+			xlarge:    ['1281px',   '1680px'   ],
+			large:     ['981px',    '1280px'   ],
+			medium:    ['737px',    '980px'    ],
+			small:     ['481px',    '736px'    ],
+			xsmall:    ['361px',    '480px'    ],
+			xxsmall:   [null,       '360px'    ]
 		});
+
+	/**
+	 * Applies parallax scrolling to an element's background image.
+	 * @return {jQuery} jQuery object.
+	 */
+	$.fn._parallax = function(intensity) {
+
+		var	$window = $(window),
+			$this = $(this);
+
+		if (this.length == 0 || intensity === 0)
+			return $this;
+
+		if (this.length > 1) {
+
+			for (var i=0; i < this.length; i++)
+				$(this[i])._parallax(intensity);
+
+			return $this;
+
+		}
+
+		if (!intensity)
+			intensity = 0.25;
+
+		$this.each(function() {
+
+			var $t = $(this),
+				$bg = $('<div class="bg"></div>').appendTo($t),
+				on, off;
+
+			on = function() {
+
+				$bg
+					.removeClass('fixed')
+					.css('transform', 'matrix(1,0,0,1,0,0)');
+
+				$window
+					.on('scroll._parallax', function() {
+
+						var pos = parseInt($window.scrollTop()) - parseInt($t.position().top);
+
+						$bg.css('transform', 'matrix(1,0,0,1,0,' + (pos * intensity) + ')');
+
+					});
+
+			};
+
+			off = function() {
+
+				$bg
+					.addClass('fixed')
+					.css('transform', 'none');
+
+				$window
+					.off('scroll._parallax');
+
+			};
+
+			// Disable parallax on ..
+				if (browser.name == 'ie'			// IE
+				||	browser.name == 'edge'			// Edge
+				||	window.devicePixelRatio > 1		// Retina/HiDPI (= poor performance)
+				||	browser.mobile)					// Mobile devices
+					off();
+
+			// Enable everywhere else.
+				else {
+
+					breakpoints.on('>large', on);
+					breakpoints.on('<=large', off);
+
+				}
+
+		});
+
+		$window
+			.off('load._parallax resize._parallax')
+			.on('load._parallax resize._parallax', function() {
+				$window.trigger('scroll');
+			});
+
+		return $(this);
+
+	};
 
 	// Play initial animations on page load.
 		$window.on('load', function() {
@@ -31,371 +117,142 @@
 			}, 100);
 		});
 
-	// Fix: Flexbox min-height bug on IE.
-		if (browser.name == 'ie') {
+	// Scrolly.
+		$('.scrolly').scrolly();
 
-			var flexboxFixTimeoutId;
+	// Background.
+		$wrapper._parallax(0.925);
 
-			$window.on('resize.flexbox-fix', function() {
+	// Nav Panel.
 
-				clearTimeout(flexboxFixTimeoutId);
+		// Toggle.
+			$navPanelToggle = $(
+				'<a href="#navPanel" id="navPanelToggle">Menu</a>'
+			)
+				.appendTo($wrapper);
 
-				flexboxFixTimeoutId = setTimeout(function() {
-
-					if ($wrapper.prop('scrollHeight') > $window.height())
-						$wrapper.css('height', 'auto');
-					else
-						$wrapper.css('height', '100vh');
-
-				}, 250);
-
-			}).triggerHandler('resize.flexbox-fix');
-
-		}
-
-	// Nav.
-		var $nav = $header.children('nav'),
-			$nav_li = $nav.find('li');
-
-		// Add "middle" alignment classes if we're dealing with an even number of items.
-			if ($nav_li.length % 2 == 0) {
-
-				$nav.addClass('use-middle');
-				$nav_li.eq( ($nav_li.length / 2) ).addClass('is-middle');
-
-			}
-
-	// Main.
-		var	delay = 325,
-			locked = false;
-
-		// Methods.
-			$main._show = function(id, initial) {
-
-				var $article = $main_articles.filter('#' + id);
-
-				// No such article? Bail.
-					if ($article.length == 0)
-						return;
-
-				// Handle lock.
-
-					// Already locked? Speed through "show" steps w/o delays.
-						if (locked || (typeof initial != 'undefined' && initial === true)) {
-
-							// Mark as switching.
-								$body.addClass('is-switching');
-
-							// Mark as visible.
-								$body.addClass('is-article-visible');
-
-							// Deactivate all articles (just in case one's already active).
-								$main_articles.removeClass('active');
-
-							// Hide header, footer.
-								$header.hide();
-								$footer.hide();
-
-							// Show main, article.
-								$main.show();
-								$article.show();
-
-							// Activate article.
-								$article.addClass('active');
-
-							// Unlock.
-								locked = false;
-
-							// Unmark as switching.
-								setTimeout(function() {
-									$body.removeClass('is-switching');
-								}, (initial ? 1000 : 0));
-
-							return;
-
-						}
-
-					// Lock.
-						locked = true;
-
-				// Article already visible? Just swap articles.
-					if ($body.hasClass('is-article-visible')) {
-
-						// Deactivate current article.
-							var $currentArticle = $main_articles.filter('.active');
-
-							$currentArticle.removeClass('active');
-
-						// Show article.
-							setTimeout(function() {
-
-								// Hide current article.
-									$currentArticle.hide();
-
-								// Show article.
-									$article.show();
-
-								// Activate article.
-									setTimeout(function() {
-
-										$article.addClass('active');
-
-										// Window stuff.
-											$window
-												.scrollTop(0)
-												.triggerHandler('resize.flexbox-fix');
-
-										// Unlock.
-											setTimeout(function() {
-												locked = false;
-											}, delay);
-
-									}, 25);
-
-							}, delay);
-
+			// Change toggle styling once we've scrolled past the header.
+				$header.scrollex({
+					bottom: '5vh',
+					enter: function() {
+						$navPanelToggle.removeClass('alt');
+					},
+					leave: function() {
+						$navPanelToggle.addClass('alt');
 					}
+				});
 
-				// Otherwise, handle as normal.
-					else {
+		// Panel.
+			$navPanel = $(
+				'<div id="navPanel">' +
+					'<nav>' +
+					'</nav>' +
+					'<a href="#navPanel" class="close"></a>' +
+				'</div>'
+			)
+				.appendTo($body)
+				.panel({
+					delay: 500,
+					hideOnClick: true,
+					hideOnSwipe: true,
+					resetScroll: true,
+					resetForms: true,
+					side: 'right',
+					target: $body,
+					visibleClass: 'is-navPanel-visible'
+				});
 
-						// Mark as visible.
-							$body
-								.addClass('is-article-visible');
+			// Get inner.
+				$navPanelInner = $navPanel.children('nav');
 
-						// Show article.
-							setTimeout(function() {
+			// Move nav content on breakpoint change.
+				var $navContent = $nav.children();
 
-								// Hide header, footer.
-									$header.hide();
-									$footer.hide();
+				breakpoints.on('>medium', function() {
 
-								// Show main, article.
-									$main.show();
-									$article.show();
+					// NavPanel -> Nav.
+						$navContent.appendTo($nav);
 
-								// Activate article.
-									setTimeout(function() {
+					// Flip icon classes.
+						$nav.find('.icons, .icon')
+							.removeClass('alt');
 
-										$article.addClass('active');
+				});
 
-										// Window stuff.
-											$window
-												.scrollTop(0)
-												.triggerHandler('resize.flexbox-fix');
+				breakpoints.on('<=medium', function() {
 
-										// Unlock.
-											setTimeout(function() {
-												locked = false;
-											}, delay);
+					// Nav -> NavPanel.
+						$navContent.appendTo($navPanelInner);
 
-									}, 25);
+					// Flip icon classes.
+						$navPanelInner.find('.icons, .icon')
+							.addClass('alt');
 
-							}, delay);
+				});
 
-					}
+			// Hack: Disable transitions on WP.
+				if (browser.os == 'wp'
+				&&	browser.osVersion < 10)
+					$navPanel
+						.css('transition', 'none');
 
-			};
+	// Intro.
+		var $intro = $('#intro');
 
-			$main._hide = function(addState) {
+		if ($intro.length > 0) {
 
-				var $article = $main_articles.filter('.active');
+			// Hack: Fix flex min-height on IE.
+				if (browser.name == 'ie') {
+					$window.on('resize.ie-intro-fix', function() {
 
-				// Article not visible? Bail.
-					if (!$body.hasClass('is-article-visible'))
-						return;
+						var h = $intro.height();
 
-				// Add state?
-					if (typeof addState != 'undefined'
-					&&	addState === true)
-						history.pushState(null, null, '#');
+						if (h > $window.height())
+							$intro.css('height', 'auto');
+						else
+							$intro.css('height', h);
 
-				// Handle lock.
-
-					// Already locked? Speed through "hide" steps w/o delays.
-						if (locked) {
-
-							// Mark as switching.
-								$body.addClass('is-switching');
-
-							// Deactivate article.
-								$article.removeClass('active');
-
-							// Hide article, main.
-								$article.hide();
-								$main.hide();
-
-							// Show footer, header.
-								$footer.show();
-								$header.show();
-
-							// Unmark as visible.
-								$body.removeClass('is-article-visible');
-
-							// Unlock.
-								locked = false;
-
-							// Unmark as switching.
-								$body.removeClass('is-switching');
-
-							// Window stuff.
-								$window
-									.scrollTop(0)
-									.triggerHandler('resize.flexbox-fix');
-
-							return;
-
-						}
-
-					// Lock.
-						locked = true;
-
-				// Deactivate article.
-					$article.removeClass('active');
-
-				// Hide article.
-					setTimeout(function() {
-
-						// Hide article, main.
-							$article.hide();
-							$main.hide();
-
-						// Show footer, header.
-							$footer.show();
-							$header.show();
-
-						// Unmark as visible.
-							setTimeout(function() {
-
-								$body.removeClass('is-article-visible');
-
-								// Window stuff.
-									$window
-										.scrollTop(0)
-										.triggerHandler('resize.flexbox-fix');
-
-								// Unlock.
-									setTimeout(function() {
-										locked = false;
-									}, delay);
-
-							}, 25);
-
-					}, delay);
-
-
-			};
-
-		// Articles.
-			$main_articles.each(function() {
-
-				var $this = $(this);
-
-				// Close.
-					$('<div class="close">Close</div>')
-						.appendTo($this)
-						.on('click', function() {
-							location.hash = '';
-						});
-
-				// Prevent clicks from inside article from bubbling.
-					$this.on('click', function(event) {
-						event.stopPropagation();
-					});
-
-			});
-
-		// Events.
-			$body.on('click', function(event) {
-
-				// Article visible? Hide.
-					if ($body.hasClass('is-article-visible'))
-						$main._hide(true);
-
-			});
-
-			$window.on('keyup', function(event) {
-
-				switch (event.keyCode) {
-
-					case 27:
-
-						// Article visible? Hide.
-							if ($body.hasClass('is-article-visible'))
-								$main._hide(true);
-
-						break;
-
-					default:
-						break;
-
+					}).trigger('resize.ie-intro-fix');
 				}
 
-			});
+			// Hide intro on scroll (> small).
+				breakpoints.on('>small', function() {
 
-			$window.on('hashchange', function(event) {
+					$main.unscrollex();
 
-				// Empty hash?
-					if (location.hash == ''
-					||	location.hash == '#') {
-
-						// Prevent default.
-							event.preventDefault();
-							event.stopPropagation();
-
-						// Hide.
-							$main._hide();
-
-					}
-
-				// Otherwise, check for a matching article.
-					else if ($main_articles.filter(location.hash).length > 0) {
-
-						// Prevent default.
-							event.preventDefault();
-							event.stopPropagation();
-
-						// Show article.
-							$main._show(location.hash.substr(1));
-
-					}
-
-			});
-
-		// Scroll restoration.
-		// This prevents the page from scrolling back to the top on a hashchange.
-			if ('scrollRestoration' in history)
-				history.scrollRestoration = 'manual';
-			else {
-
-				var	oldScrollPos = 0,
-					scrollPos = 0,
-					$htmlbody = $('html,body');
-
-				$window
-					.on('scroll', function() {
-
-						oldScrollPos = scrollPos;
-						scrollPos = $htmlbody.scrollTop();
-
-					})
-					.on('hashchange', function() {
-						$window.scrollTop(oldScrollPos);
+					$main.scrollex({
+						mode: 'bottom',
+						top: '25vh',
+						bottom: '-50vh',
+						enter: function() {
+							$intro.addClass('hidden');
+						},
+						leave: function() {
+							$intro.removeClass('hidden');
+						}
 					});
 
-			}
+				});
 
-		// Initialize.
+			// Hide intro on scroll (<= small).
+				breakpoints.on('<=small', function() {
 
-			// Hide main, articles.
-				$main.hide();
-				$main_articles.hide();
+					$main.unscrollex();
 
-			// Initial article.
-				if (location.hash != ''
-				&&	location.hash != '#')
-					$window.on('load', function() {
-						$main._show(location.hash.substr(1), true);
+					$main.scrollex({
+						mode: 'middle',
+						top: '15vh',
+						bottom: '-15vh',
+						enter: function() {
+							$intro.addClass('hidden');
+						},
+						leave: function() {
+							$intro.removeClass('hidden');
+						}
 					});
+
+			});
+
+		}
 
 })(jQuery);

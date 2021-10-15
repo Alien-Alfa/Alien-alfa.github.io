@@ -1,5 +1,5 @@
 ///
-/// Dimension by HTML5 UP
+/// Massively by HTML5 UP
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
@@ -69,31 +69,29 @@
 	}
 
 	label {
-		color: _palette(fg-bold);
 		display: block;
-		font-size: 0.8rem;
-		font-weight: _font(weight);
-		letter-spacing: _font(letter-spacing);
+		font-family: _font(family-heading);
+		font-weight: _font(weight-heading);
 		line-height: 1.5;
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
+		letter-spacing: 0.075em;
+		font-size: 0.8rem;
 		text-transform: uppercase;
+		margin: 0 0 (_size(element-margin) * 0.375) 0;
+
+		@include breakpoint('<=medium') {
+			font-size: 0.9rem;
+		}
 	}
 
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
-	input[type="tel"],
 	select,
 	textarea {
 		@include vendor('appearance', 'none');
-		@include vendor('transition', (
-			'border-color #{_duration(transition)} ease-in-out',
-			'box-shadow #{_duration(transition)} ease-in-out',
-			'background-color #{_duration(transition)} ease-in-out'
-		));
-		background-color: transparent;
-		border-radius: _size(border-radius);
-		border: solid _size(border-width) _palette(border);
+		background: transparent;
+		border-radius: 0;
+		border: solid 2px;
 		color: inherit;
 		display: block;
 		outline: 0;
@@ -104,27 +102,15 @@
 		&:invalid {
 			box-shadow: none;
 		}
-
-		&:focus {
-			background: _palette(border-bg);
-			border-color: _palette(fg-bold);
-			box-shadow: 0 0 0 _size(border-width) _palette(fg-bold);
-		}
 	}
 
 	select {
-		background-image: svg-url("<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' preserveAspectRatio='none' viewBox='0 0 40 40'><path d='M9.4,12.3l10.4,10.4l10.4-10.4c0.2-0.2,0.5-0.4,0.9-0.4c0.3,0,0.6,0.1,0.9,0.4l3.3,3.3c0.2,0.2,0.4,0.5,0.4,0.9 c0,0.4-0.1,0.6-0.4,0.9L20.7,31.9c-0.2,0.2-0.5,0.4-0.9,0.4c-0.3,0-0.6-0.1-0.9-0.4L4.3,17.3c-0.2-0.2-0.4-0.5-0.4-0.9 c0-0.4,0.1-0.6,0.4-0.9l3.3-3.3c0.2-0.2,0.5-0.4,0.9-0.4S9.1,12.1,9.4,12.3z' fill='#{_palette(border)}' /></svg>");
 		background-size: 1.25rem;
 		background-repeat: no-repeat;
 		background-position: calc(100% - 1rem) center;
 		height: _size(element-height);
 		padding-right: _size(element-height);
 		text-overflow: ellipsis;
-
-		option {
-			color: _palette(fg);
-			background: _palette(bg);
-		}
 
 		&:focus {
 			&::-ms-value {
@@ -160,52 +146,36 @@
 
 		& + label {
 			@include icon(false, solid);
-			@include vendor('user-select', 'none');
-			color: _palette(fg);
 			cursor: pointer;
 			display: inline-block;
-			font-size: 0.8rem;
+			font-size: 1rem;
+			letter-spacing: 0;
+			font-family: _font(family);
+			text-transform: none;
 			font-weight: _font(weight);
-			margin: 0 0 (_size(element-margin) * 0.25) 0;
 			padding-left: (_size(element-height) * 0.6) + 1rem;
-			padding-right: 0.75rem;
+			padding-right: 1rem;
 			position: relative;
 
 			&:before {
-				@include vendor('transition', (
-					'border-color #{_duration(transition)} ease-in-out',
-					'box-shadow #{_duration(transition)} ease-in-out',
-					'background-color #{_duration(transition)} ease-in-out'
-				));
-				border-radius: _size(border-radius);
-				border: solid _size(border-width) _palette(border);
+				border-radius: 0;
+				border: solid 2px;
 				content: '';
 				display: inline-block;
+				font-size: 0.8rem;
 				height: (_size(element-height) * 0.6);
 				left: 0;
-				line-height: (_size(element-height) * 0.6);
-				//line-height: calc(#{_size(element-height) * 0.6} + 0em);
+				line-height: (_size(element-height) * 0.55);
 				position: absolute;
 				text-align: center;
-				top: -0.15rem;
+				top: -0.125rem;
 				width: (_size(element-height) * 0.6);
 			}
 		}
 
 		&:checked + label {
 			&:before {
-				background: _palette(fg-bold) !important;
-				border-color: _palette(fg-bold) !important;
-				color: _palette(bg);
 				content: '\f00c';
-			}
-		}
-
-		&:focus + label {
-			&:before {
-				background: _palette(border-bg);
-				border-color: _palette(fg-bold);
-				box-shadow: 0 0 0 _size(border-width) _palette(fg-bold);
 			}
 		}
 	}
@@ -213,7 +183,7 @@
 	input[type="checkbox"] {
 		& + label {
 			&:before {
-				border-radius: _size(border-radius);
+				border-radius: 0;
 			}
 		}
 	}
@@ -227,26 +197,97 @@
 	}
 
 	::-webkit-input-placeholder {
-		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	:-moz-placeholder {
-		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	::-moz-placeholder {
-		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
 	:-ms-input-placeholder {
-		color: _palette(fg-light) !important;
 		opacity: 1.0;
 	}
 
-	.formerize-placeholder {
-		color: _palette(fg-light) !important;
-		opacity: 1.0;
+	@mixin color-form($p: null) {
+		label {
+			color: _palette($p, fg-bold);
+		}
+
+		input[type="text"],
+		input[type="password"],
+		input[type="email"],
+		select,
+		textarea {
+			border-color: _palette($p, border);
+
+			&:focus {
+				border-color: _palette($p, accent);
+			}
+		}
+
+		select {
+			background-image: svg-url("<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' preserveAspectRatio='none' viewBox='0 0 40 40'><path d='M9.4,12.3l10.4,10.4l10.4-10.4c0.2-0.2,0.5-0.4,0.9-0.4c0.3,0,0.6,0.1,0.9,0.4l3.3,3.3c0.2,0.2,0.4,0.5,0.4,0.9 c0,0.4-0.1,0.6-0.4,0.9L20.7,31.9c-0.2,0.2-0.5,0.4-0.9,0.4c-0.3,0-0.6-0.1-0.9-0.4L4.3,17.3c-0.2-0.2-0.4-0.5-0.4-0.9 c0-0.4,0.1-0.6,0.4-0.9l3.3-3.3c0.2-0.2,0.5-0.4,0.9-0.4S9.1,12.1,9.4,12.3z' fill='#{_palette($p, border)}' /></svg>");
+
+			option {
+				background-color: _palette($p, bg);
+				color: _palette($p, fg);
+			}
+		}
+
+		.select-wrapper {
+			&:before {
+				color: _palette($p, border);
+			}
+		}
+
+		input[type="checkbox"],
+		input[type="radio"], {
+			& + label {
+				color: _palette($p, fg);
+
+				&:before {
+					border-color: _palette($p, border);
+				}
+			}
+
+			&:checked + label {
+				&:before {
+					background-color: _palette($p, fg-bold);
+					border-color: _palette($p, fg-bold);
+					color: _palette($p, bg);
+				}
+			}
+
+			&:focus + label {
+				&:before {
+					border-color: _palette($p, accent);
+				}
+			}
+		}
+
+		::-webkit-input-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+
+		:-moz-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+
+		::-moz-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+
+		:-ms-input-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
+
+		.formerize-placeholder {
+			color: _palette($p, fg-light) !important;
+		}
 	}
+
+	@include color-form;

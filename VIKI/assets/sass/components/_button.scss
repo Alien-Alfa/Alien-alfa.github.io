@@ -1,5 +1,5 @@
 ///
-/// Dimension by HTML5 UP
+/// Massively by HTML5 UP
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
@@ -12,37 +12,56 @@
 	button,
 	.button {
 		@include vendor('appearance', 'none');
-		@include vendor('transition', 'background-color #{_duration(transition)} ease-in-out, color #{_duration(transition)} ease-in-out');
-		background-color: transparent;
-		border-radius: _size(border-radius);
+		@include vendor('transition', (
+			'background-color #{_duration(transition)} ease-in-out',
+			'box-shadow #{_duration(transition)} ease-in-out',
+			'color #{_duration(transition)} ease-in-out'
+		));
 		border: 0;
-		box-shadow: inset 0 0 0 _size(border-width) _palette(border);
-		color: _palette(fg-bold) !important;
+		border-radius: 0;
 		cursor: pointer;
 		display: inline-block;
+		font-family: _font(family-heading);
 		font-size: 0.8rem;
-		font-weight: _font(weight);
-		height: _size(element-height);
-		letter-spacing: _font(letter-spacing);
-		line-height: _size(element-height);
-		outline: 0;
-		padding: 0 1.25rem 0 (1.25rem + (_font(letter-spacing) * 0.5));
+		font-weight: _font(weight-heading);
+		letter-spacing: 0.075em;
+		height: 3rem;
+		line-height: 3rem;
+		padding: 0 2rem;
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
 		white-space: nowrap;
 
-		&:hover {
-			background-color: _palette(border-bg);
-		}
-
-		&:active {
-			background-color: _palette(border-bg-alt);
-		}
-
 		&.icon {
 			&:before {
-				margin-right: 0.5em;
+				margin-right: 0.5rem;
+			}
+
+			&.solo {
+				position: relative;
+				width: 4rem;
+				height: 4rem;
+				line-height: 4rem;
+				border-radius: 4rem;
+				text-indent: 4rem;
+				overflow: hidden;
+				padding: 0;
+				white-space: nowrap;
+
+				&:before {
+					position: absolute;
+					display: block;
+					top: 0;
+					left: 0;
+					width: inherit;
+					height: inherit;
+					line-height: inherit;
+					font-size: 1.25rem;
+					margin-right: 0;
+					text-align: center;
+					text-indent: 0;
+				}
 			}
 		}
 
@@ -51,34 +70,65 @@
 		}
 
 		&.small {
-			font-size: 0.6rem;
-			height: (_size(element-height) * 0.75);
-			line-height: (_size(element-height) * 0.75);
+			font-size: 0.7rem;
+			height: 2.5rem;
+			line-height: 2.5rem;
+			padding: 0 1.5rem;
 		}
 
-		&.primary {
-			background-color: _palette(fg-bold);
-			color: _palette(bg) !important;
-			font-weight: _font(weight-bold);
+		&.large {
+			font-size: 0.9rem;
+			height: 3.5rem;
+			line-height: 3.5rem;
+			padding: 0 2.75rem;
+		}
 
-			&:hover {
-			}
+		@include breakpoint('<=medium') {
+			font-size: 0.9rem;
+			height: 3.25rem;
+			line-height: 3.25rem;
 
-			&:active {
+			&.large {
+				font-size: 1rem;
+				height: 3.75rem;
+				line-height: 3.75rem;
 			}
 		}
 
 		&.disabled,
 		&:disabled {
 			@include vendor('pointer-events', 'none');
-			cursor: default;
 			opacity: 0.25;
 		}
 	}
 
-	input[type="submit"],
-	input[type="reset"],
-	input[type="button"],
-	button {
-		line-height: calc(#{_size(element-height)} - 2px);
+	@mixin color-button($p: null) {
+		$highlight: _palette($p, highlight);
+
+		input[type="submit"],
+		input[type="reset"],
+		input[type="button"],
+		button,
+		.button {
+			background-color: transparent;
+			box-shadow: inset 0 0 0 2px _palette($p, fg-bold);
+			color: _palette($p, fg-bold) !important;
+
+			&:hover {
+				box-shadow: inset 0 0 0 2px _palette($p, accent);
+				color: _palette($p, accent) !important;
+			}
+
+			&.primary {
+				background-color: _palette($p, fg-bold);
+				box-shadow: none;
+				color: _palette($p, bg) !important;
+
+				&:hover {
+					background-color: _palette($p, accent);
+				}
+			}
+		}
 	}
+
+	@include color-button;
