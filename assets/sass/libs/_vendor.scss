@@ -1,9 +1,4 @@
-// vendor.scss v1.0 | @ajlkn | MIT licensed */
 
-// Vars.
-
-	/// Vendor prefixes.
-	/// @var {list}
 	$vendor-prefixes: (
 		'-moz-',
 		'-webkit-',
@@ -11,12 +6,10 @@
 		''
 	);
 
-	/// Properties that should be vendorized.
-	/// Data via caniuse.com, github.com/postcss/autoprefixer, and developer.mozilla.org
-	/// @var {list}
+
 	$vendor-properties: (
 
-		// Animation.
+
 			'animation',
 			'animation-delay',
 			'animation-direction',
@@ -27,27 +20,23 @@
 			'animation-play-state',
 			'animation-timing-function',
 
-		// Appearance.
+
 			'appearance',
 
-		// Backdrop filter.
+
 			'backdrop-filter',
 
-		// Background image options.
+
 			'background-clip',
 			'background-origin',
 			'background-size',
 
-		// Box sizing.
 			'box-sizing',
 
-		// Clip path.
 			'clip-path',
 
-		// Filter effects.
 			'filter',
 
-		// Flexbox.
 			'align-content',
 			'align-items',
 			'align-self',
@@ -61,18 +50,14 @@
 			'justify-content',
 			'order',
 
-		// Font feature.
 			'font-feature-settings',
 			'font-language-override',
 			'font-variant-ligatures',
 
-		// Font kerning.
 			'font-kerning',
 
-		// Fragmented borders and backgrounds.
 			'box-decoration-break',
 
-		// Grid layout.
 			'grid-column',
 			'grid-column-align',
 			'grid-column-end',
@@ -84,11 +69,9 @@
 			'grid-template-columns',
 			'grid-template-rows',
 
-		// Hyphens.
 			'hyphens',
 			'word-break',
 
-		// Masks.
 			'mask',
 			'mask-border',
 			'mask-border-outset',
@@ -104,7 +87,6 @@
 			'mask-repeat',
 			'mask-size',
 
-		// Multicolumn.
 			'break-after',
 			'break-before',
 			'break-inside',
@@ -119,115 +101,88 @@
 			'column-width',
 			'columns',
 
-		// Object fit.
 			'object-fit',
 			'object-position',
 
-		// Regions.
 			'flow-from',
 			'flow-into',
 			'region-fragment',
 
-		// Scroll snap points.
 			'scroll-snap-coordinate',
 			'scroll-snap-destination',
 			'scroll-snap-points-x',
 			'scroll-snap-points-y',
 			'scroll-snap-type',
 
-		// Shapes.
 			'shape-image-threshold',
 			'shape-margin',
 			'shape-outside',
 
-		// Tab size.
 			'tab-size',
 
-		// Text align last.
 			'text-align-last',
 
-		// Text decoration.
 			'text-decoration-color',
 			'text-decoration-line',
 			'text-decoration-skip',
 			'text-decoration-style',
 
-		// Text emphasis.
 			'text-emphasis',
 			'text-emphasis-color',
 			'text-emphasis-position',
 			'text-emphasis-style',
 
-		// Text size adjust.
 			'text-size-adjust',
 
-		// Text spacing.
 			'text-spacing',
 
-		// Transform.
 			'transform',
 			'transform-origin',
 
-		// Transform 3D.
 			'backface-visibility',
 			'perspective',
 			'perspective-origin',
 			'transform-style',
 
-		// Transition.
 			'transition',
 			'transition-delay',
 			'transition-duration',
 			'transition-property',
 			'transition-timing-function',
 
-		// Unicode bidi.
 			'unicode-bidi',
 
-		// User select.
 			'user-select',
 
-		// Writing mode.
 			'writing-mode',
 
 	);
 
-	/// Values that should be vendorized.
-	/// Data via caniuse.com, github.com/postcss/autoprefixer, and developer.mozilla.org
-	/// @var {list}
+
 	$vendor-values: (
 
-		// Cross fade.
 			'cross-fade',
 
-		// Element function.
 			'element',
 
-		// Filter function.
 			'filter',
 
-		// Flexbox.
 			'flex',
 			'inline-flex',
 
-		// Grab cursors.
 			'grab',
 			'grabbing',
 
-		// Gradients.
 			'linear-gradient',
 			'repeating-linear-gradient',
 			'radial-gradient',
 			'repeating-radial-gradient',
 
-		// Grid layout.
 			'grid',
 			'inline-grid',
 
-		// Image set.
 			'image-set',
 
-		// Intrinsic width.
 			'max-content',
 			'min-content',
 			'fit-content',
@@ -235,25 +190,17 @@
 			'fill-available',
 			'stretch',
 
-		// Sticky position.
 			'sticky',
 
-		// Transform.
 			'transform',
 
-		// Zoom cursors.
 			'zoom-in',
 			'zoom-out',
 
 	);
 
-// Functions.
 
-	/// Removes a specific item from a list.
-	/// @author Hugo Giraudel
-	/// @param {list} $list List.
-	/// @param {integer} $index Index.
-	/// @return {list} Updated list.
+
 	@function remove-nth($list, $index) {
 
 		$result: null;
@@ -286,12 +233,7 @@
 
 	}
 
-	/// Replaces a substring within another string.
-	/// @author Hugo Giraudel
-	/// @param {string} $string String.
-	/// @param {string} $search Substring.
-	/// @param {string} $replace Replacement.
-	/// @return {string} Updated string.
+
 	@function str-replace($string, $search, $replace: '') {
 
 		$index: str-index($string, $search);
@@ -304,11 +246,7 @@
 
 	}
 
-	/// Replaces a substring within each string in a list.
-	/// @param {list} $strings List of strings.
-	/// @param {string} $search Substring.
-	/// @param {string} $replace Replacement.
-	/// @return {list} Updated list of strings.
+
 	@function str-replace-all($strings, $search, $replace: '') {
 
 		@each $string in $strings {
@@ -319,10 +257,7 @@
 
 	}
 
-// Mixins.
 
-	/// Wraps @content in vendorized keyframe blocks.
-	/// @param {string} $name Name.
 	@mixin keyframes($name) {
 
 		@-moz-keyframes #{$name} { @content; }
@@ -332,15 +267,12 @@
 
 	}
 
-	/// Vendorizes a declaration's property and/or value(s).
-	/// @param {string} $property Property.
-	/// @param {mixed} $value String/list of value(s).
+
 	@mixin vendor($property, $value) {
 
-		// Determine if property should expand.
 			$expandProperty: index($vendor-properties, $property);
 
-		// Determine if value should expand (and if so, add '-prefix-' placeholder).
+
 			$expandValue: false;
 
 			@each $x in $value {
@@ -354,21 +286,18 @@
 				}
 			}
 
-		// Expand property?
 			@if $expandProperty {
 			    @each $vendor in $vendor-prefixes {
 			        #{$vendor}#{$property}: #{str-replace-all($value, '-prefix-', $vendor)};
 			    }
 			}
 
-		// Expand just the value?
 			@elseif $expandValue {
 			    @each $vendor in $vendor-prefixes {
 			        #{$property}: #{str-replace-all($value, '-prefix-', $vendor)};
 			    }
 			}
 
-		// Neither? Treat them as a normal declaration.
 			@else {
 		        #{$property}: #{$value};
 			}

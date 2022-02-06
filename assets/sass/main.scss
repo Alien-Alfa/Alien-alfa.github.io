@@ -6,13 +6,7 @@
 @import 'fontawesome-all.min.css';
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300');
 
-/*
-	Identity by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
 
-// Breakpoints.
 
 	@include breakpoints((
 		xlarge:    (1281px,   1680px   ),
@@ -23,7 +17,6 @@
 		xxsmall:   (null,     360px    )
 	));
 
-/* Icon (alt) */
 
 	@mixin icon-alt($content: false, $link: false) {
 		@include icon($content);
@@ -50,13 +43,11 @@
 		}
 	}
 
-// Base.
 
 	@import 'base/reset';
 	@import 'base/page';
 	@import 'base/typography';
 
-// Component.
 
 	@import 'components/form';
 	@import 'components/icon';
@@ -65,7 +56,6 @@
 	@import 'components/icons';
 	@import 'components/button';
 
-// Layout.
 
 	@import 'layout/main';
 	@import 'layout/footer';
