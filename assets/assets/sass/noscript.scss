@@ -1,0 +1,19 @@
+@import 'libs/vars';
+@import 'libs/functions';
+@import 'libs/mixins';
+@import 'libs/vendor';
+@import 'libs/breakpoints';
+
+
+
+	body {
+		&:after {
+			display: none;
+		}
+	}
+
+
+	#main {
+		@include vendor('transform', 'none !important');
+		opacity: 1 !important;
+	}
