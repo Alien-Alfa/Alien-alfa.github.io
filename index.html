@@ -1,151 +1,128 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Albin Thomas</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
 
-<html>
-	<head>
-		<!-- <audio autoplay="true" src="images/web.mp3"> 
-		Update your browser. Your browser does not support HTML audio
-		</audio> -->
-		<align="center">click on the image to play audio</align>
-		
-		<title>INFO AI-VIKI</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Hello, I'm <span class="highlight">Albin Thomas</span></h1>
+<!--                <h2 class="typing-text">I am a <span id="typewriter"></span></h2> -->
+                <p>Building digital experiences with passion and code.</p>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+            <div class="hero-image">
+                <img src="me.png" alt="Albin Thomas" class="profile-img">
+            </div>
+        </section>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-container">
+                <div class="about-text">
+                    <p>I'm a passionate web developer with a knack for creating user-friendly and visually appealing websites. With a strong foundation in modern web technologies, I love turning complex problems into simple, beautiful, and intuitive designs.</p>
+                    <p>When I'm not coding, you can find me exploring new tech, reading sci-fi novels, or hiking in the mountains.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-code-branch"></i>
+                        <h3>200+</h3>
+                        <p>Projects</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-code"></i>
+                        <h3>70,000+</h3>
+                        <p>lines</p>
+                    </div>
+                 <!--    <div class="stat-card">
+                        <i class="fas fa-smile"></i>
+                        <h3>100%</h3>
+                        <p>Satisfaction</p>
+                    </div> -->
+                </div>
+            </div>
+        </section>
 
-				<!-- Main -->
-					<section id="main">
-						<header>
-							 <a href="assets/index.html"><span class="avatar"><img width='200' height='200'  src="https://github.com/Alien-Alfa/Alien-alfa.github.io/blob/master/images/alienalfa%202023-05-05T235136.jpeg?raw=true" alt=""> </a></span>
-							<h1>Albin Thomas</h1>
-							<p>Programmer with a creative mind</p> 
-							</h5> [𝙲𝙻𝙸𝙲𝙺 𝙾𝙽 𝙸𝙼𝙰𝙶𝙴] </h5>
-						</header>
-						
-						
-						
-						
-						
-						
-						
-						<!--     
-						<hr />
-						<h2>Direct Contact!</h2>
-						<form method="post" action="#">
-							<div class="fields">
-								<div class="field">
-									<input type="text" name="name" id="name" placeholder="Name" />
-								</div>
-								<div class="field">
-									<input type="email" name="email" id="email" placeholder="Email" />
-								</div>
-								
-								<div class="field">
-									<select name="department" id="department">
-										<option value="">Department</option>
-										<option value="sales">Sales</option>
-										<option value="tech">Tech Support</option>
-										<option value="null">/dev/null</option>
-									</select>
-								</div>
-							
-								<div class="field">
-									<textarea name="message" id="message" placeholder="Message" rows="4"></textarea>
-								</div>
-								<div class="field">
-									<input type="checkbox" id="human" name="human" /><label for="human">I'm a human</label>
-								</div>
-								
-								<div class="field">
-									<label>But are you a robot?</label>
-									<input type="radio" id="robot_yes" name="robot" /><label for="robot_yes">Yes</label>
-									<input type="radio" id="robot_no" name="robot" /><label for="robot_no">No</label>
-								</div>
-							</div>
-							
-							<ul class="actions special">
-								<li><a href="html5up-aerial/index.html" class="button">aerial</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-arcana/index.html" class="button">arcana</a></li>	
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-astral/index.html" class="button">astral</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-dopetrope/index.html" class="button">dopetrope</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-editorial/index.html" class="button">editorial</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-forty/index.html" class="button">forty</a></li>	
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-future-imperfect/index.html" class="button">imperfect</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-halcyonic/index.html" class="button">halcyonic</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-identity/index.html" class="button">identity</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-massively/index.html" class="button">massively</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-stellar/index.html" class="button">stellar</a></li>	
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-striped/index.html" class="button">striped</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-strongly-typed/index.html" class="button">strongly-typed</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-telephasic/index.html" class="button">telephasic</a></li>
-							</ul>
-							<ul class="actions special">
-								<li><a href="html5up-txt/index.html" class="button">txt</a></li>
-							</ul>
-							
-							<ul class="actions special">
-								<li><a href="VIKI/VIKI.html" class="button">AI-VIKI</a></li>
-							</ul>
-						</form>
-						<hr />
-						   -->
-						<footer>
-							<ul class="icons">
-								<li><a href="https://wa.me/message/LOLRAF3TJZJFA1" class="icon brands fa-whatsapp">Twitter</a></li>
-								<li><a href="https://www.instagram.com/alienalfa/" class="icon brands fa-instagram">Instagram</a></li>
-								<li><a href="https://www.facebook.com/VIP.TechnoDevils.ltd.inc" class="icon brands fa-facebook-f">Facebook</a></li>
-							</ul>
-						</footer>
-					</section>
+        <section id="skills" class="section">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-js"></i>
+                    <h3>JavaScript</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-react"></i>
+                    <h3>React</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-node"></i>
+                    <h3>Node.js</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 75%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-git-alt"></i>
+                    <h3>Git</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 88%"></div></div>
+                </div>
+            </div>
+        </section>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<ul class="copyright">
-							<li>&copy; Albin Thomas</li><li>Design: <a href="https://github.com/alien-alfa">Alien-Alfa</a></li>
-						</ul>
-					</footer>
+        <section id="contact" class="section">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-container">
+                <div class="social-links">
+                    <a href="https://github.com/Alien-Alfa" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://wa.me/message/PX3JI35J2DPZK1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://twitter.com/Alien_Alfa_" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/AlienAlfa" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-			</div>
+    <footer>
+        <p>&copy; 2024 Albin Thomas. All Rights Reserved.</p>
+    </footer>
 
-		<!-- Scripts -->
-			<script>
-				if ('addEventListener' in window) {
-					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
-					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
-				}
-			</script>
-
-	
-	</body>
+    <script src="script.js"></script>
+</body>
 </html>
